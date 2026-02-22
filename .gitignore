@@ -1,0 +1,20 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+.env
+.ipynb_checkpoints/
+
+# Airflow local
+airflow/
+logs/
+
+# Data artifacts (commit only small raw sample or instructions)
+data/processed/
+data/marts/
+!data/processed/.gitkeep
+!data/marts/.gitkeep
+
+# OS
+.DS_Store
+Thumbs.db

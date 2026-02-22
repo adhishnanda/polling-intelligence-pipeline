@@ -1,0 +1,17 @@
+digraph Lineage {
+  rankdir=LR;
+  node [shape=box, style="rounded"];
+
+  raw [label="data/raw/president_polls.csv"];
+  cleaned [label="data/processed/polls_cleaned.csv"];
+  marts [label="data/marts/mart_*.csv"];
+  pred [label="reports/prediction_summary.csv"];
+  dash [label="dashboard/streamlit_app.py"];
+
+  raw -> cleaned [label="ingest + clean"];
+  cleaned -> marts [label="analytics + features"];
+  cleaned -> pred [label="baseline prediction"];
+  cleaned -> dash;
+  marts -> dash;
+  pred -> dash;
+}

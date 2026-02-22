@@ -1,0 +1,17 @@
+flowchart TB
+  subgraph Now["Current (Implemented)"]
+    A1[CSV snapshot] --> B1[Airflow ETL]
+    B1 --> C1[(Local curated datasets)]
+    C1 --> D1[Streamlit Dashboard]
+    C1 --> E1[Baseline prediction DAG]
+  end
+
+  subgraph Next["Next (Designed)"]
+    A2[Automated fetch\n(API/HTML parse)] --> V[Data validation\n(Great Expectations)]
+    V --> B2[Scheduled Airflow DAG]
+    B2 --> DB[(Postgres / Warehouse)]
+    DB --> FE[Feature store table]
+    FE --> TR[Model retraining schedule]
+    TR --> SRV[Batch scoring / service]
+    DB --> D2[Dashboard queries]
+  end

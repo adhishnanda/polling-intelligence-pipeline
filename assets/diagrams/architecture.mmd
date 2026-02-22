@@ -1,0 +1,32 @@
+flowchart TB
+  subgraph L0["L0: Data Source Layer"]
+    A[FiveThirtyEight Polling Export\nCSV Snapshot]
+  end
+
+  subgraph L1["L1: Orchestration Layer (Airflow)"]
+    B1[trigger: polling_intelligence_etl]
+    B2[ingest_raw]
+    B3[clean_transform]
+    B4[marts_and_features]
+    B5[trigger: polling_baseline_prediction]
+  end
+
+  subgraph L2["L2: Storage Layer (Local Artifacts)"]
+    C1[(data/raw/president_polls.csv)]
+    C2[(data/processed/polls_cleaned.csv)]
+    C3[(data/marts/mart_*.csv)]
+    C4[(reports/prediction_summary.csv)]
+  end
+
+  subgraph L3["L3: Serving Layer"]
+    D[Streamlit dashboard]
+  end
+
+  A --> B1
+  B1 --> B2 --> C1
+  B2 --> B3 --> C2
+  B3 --> B4 --> C3
+  B5 --> C4
+  C2 --> D
+  C3 --> D
+  C4 --> D
